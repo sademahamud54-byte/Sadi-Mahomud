@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="bn" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>SM SADI — Automated Quant Trading &amp; Security Platform</title>
+  <meta name="description" content="SM SADI Automated AI Trading Platform with 98% Confidence Filter, $10M Demo & $1 Welcome Balance, 1-10m Dropdown & Stop Limit Box, 10s Monetag Ad Loop, Gold Coins, and Telegram MiniApp." />
+  <meta property="og:title" content="SM SADI — Automated Quant Trading &amp; Security Platform" />
+  <meta property="og:description" content="SM SADI Automated AI Trading Platform with 98% Confidence Filter, $10M Demo & $1 Welcome Balance, 1-10m Dropdown & Stop Limit Box, 10s Monetag Ad Loop, Gold Coins, and Telegram MiniApp." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/png" href="smbg.png" />
+
+  <!-- Google Fonts (Orbitron + Hind Siliguri — Exact match with Blogger Theme Video) -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;900&family=Hind+Siliguri:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+
+  <!-- Telegram Mini App Official SDK + CloudStorage v7.10 Compatibility Shim -->
+  <script>
+    (function () {
+      try {
+        var raw = sessionStorage.getItem('__telegram__initParams');
+        var params = raw ? JSON.parse(raw) : {};
+        if (!params.tgWebAppVersion || parseFloat(params.tgWebAppVersion) < 6.9) {
+          params.tgWebAppVersion = '7.10';
+          sessionStorage.setItem('__telegram__initParams', JSON.stringify(params));
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script>
+    (function () {
+      try {
+        if (window.Telegram && window.Telegram.WebApp) {
+          var tg = window.Telegram.WebApp;
+          var memStore = {};
+          var cloudStoragePolyfill = {
+            setItem: function (key, value, cb) {
+              memStore[String(key)] = String(value);
+              if (typeof cb === 'function') cb(null, true);
+            },
+            getItem: function (key, cb) {
+              var val = Object.prototype.hasOwnProperty.call(memStore, String(key))
+                ? memStore[String(key)]
+                : '';
+              if (typeof cb === 'function') cb(null, val);
+            },
+            getItems: function (keys, cb) {
+              var res = {};
+              if (Array.isArray(keys)) {
+                for (var i = 0; i < keys.length; i++) {
+                  var k = String(keys[i]);
+                  res[k] = Object.prototype.hasOwnProperty.call(memStore, k) ? memStore[k] : '';
+                }
+              }
+              if (typeof cb === 'function') cb(null, res);
+            },
+            removeItem: function (key, cb) {
+              delete memStore[String(key)];
+              if (typeof cb === 'function') cb(null, true);
+            },
+            removeItems: function (keys, cb) {
+              if (Array.isArray(keys)) {
+                for (var i = 0; i < keys.length; i++) {
+                  delete memStore[String(keys[i])];
+                }
+              }
+              if (typeof cb === 'function') cb(null, true);
+            },
+            getKeys: function (cb) {
+              if (typeof cb === 'function') cb(null, Object.keys(memStore));
+            }
+          };
+          tg.isVersionAtLeast = function () { return true; };
+          if (tg.CloudStorage) {
+            Object.keys(cloudStoragePolyfill).forEach(function (k) {
+              try { tg.CloudStorage[k] = cloudStoragePolyfill[k]; } catch (e) {}
+              try {
+                Object.defineProperty(tg.CloudStorage, k, {
+                  value: cloudStoragePolyfill[k],
+                  configurable: true,
+                  writable: true
+                });
+              } catch (e) {}
+            });
+          }
+          try {
+            Object.defineProperty(tg, 'CloudStorage', {
+              value: cloudStoragePolyfill,
+              configurable: true,
+              writable: true
+            });
+          } catch (e) {}
+        }
+      } catch (err) {}
+    })();
+  </script>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Monetag Ad SDKs (3 Zones: 11924593, 11924529, 11924571 -> 3x3 = 9 Serial Ad Slots) -->
+  <script src="https://libtl.com/sdk.js" data-zone="11924593" data-sdk="show_11924593" async></script>
+  <script src="https://libtl.com/sdk.js" data-zone="11924529" data-sdk="show_11924529" async></script>
+  <script src="https://libtl.com/sdk.js" data-zone="11924571" data-sdk="show_11924571" async></script>
+
+  <!-- ==========================================================================
+       1. EMBEDDED JSON CONFIGURATION (এক ফাইলের ভেতরেই সকল JSON Config — Blogger ও HopWeb এর জন্য)
+       ========================================================================== -->
+  <script id="sm-sadi-json-config" type="application/json">
+  {
+    "ENGINE_CODE_NAME": "SM SADI",
+    "PROFILE_IMAGE_FILE": "smbg.png",
+    "CONFIDENCE_THRESHOLD": 98.0,
+    "INITIAL_DEMO_BALANCE_USD": 10000000.00,
+    "WELCOME_MAIN_BALANCE_USD": 1.00,
+    "MANDATORY_LOCKED_HOLD_USD": 2.00,
+    "MIN_DEPOSIT_USD": 2.00,
+    "MIN_TRADE_STAKE_USD": 1.00,
+    "MIN_TRADE_DURATION_MINUTES": 1,
+    "MAX_TRADE_DURATION_MINUTES": 600,
+    "ADMIN_SERVICE_FEE_PCT": 0.02,
+    "USD_TO_BDT_RATE": 123.50,
+    "AES_MASTER_KEY": "smsadimtradingplatformsecretkey32",
+    "LEDGER_HASH_SALT": "smsadim_secure_salt_10_1_2026",
+    "JWT_SECRET_KEY": "jwt_smsadim_ai_trading_secorkey_99",
+    "FIREBASE_DB_URL": "https://sm-sadi-ai-trading-platform-default-rtdb.firebaseio.com",
+    "USER_BOT_TOKEN": "8585116863:AAHBoPwLN9YwpiVDAWHUTTch6LIbJmYXEos",
+    "ADMIN_BOT_TOKEN": "8788358073:AAGFMhURmBOHS80WV5FYQ763_Atp22g1ipI",
+    "ADMIN_TELEGRAM_ID": 7504836023,
+    "BOT_USERNAME": "SMSADIAI_Bot",
+    "MINI_APP_BUTTON_TEXT": "🚀 Open SM AI TRADER",
+    "MONETAG_ZONES": ["11924593", "11924529", "11924571"]
+  }
+  </script>
+
+  <!-- ==========================================================================
+       2. EMBEDDED NATIVE CSS (Blogger Theme Edit HTML + HopWeb-এ ১০০% কাজ করার জন্য)
+       ========================================================================== -->
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      background-color: #05070a !important;
+      background-image:
+        radial-gradient(circle at 15% 0%, rgba(0, 242, 254, 0.14), transparent 42%),
+        radial-gradient(circle at 85% 100%, rgba(16, 185, 129, 0.10), transparent 42%);
+      color: #ffffff !important;
+      font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    /* Hide Blogger default navbar if user forgets to turn it off */
+    #navbar-iframe, .navbar, #b-navbar {
+      display: none !important;
+    }
+    .font-orbitron {
+      font-family: 'Orbitron', 'Hind Siliguri', sans-serif;
+      background: linear-gradient(90deg, #00f2fe, #4facfe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 15px rgba(0, 242, 254, 0.35);
+    }
+    .font-mono-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-variant-numeric: tabular-nums;
+    }
+    /* ঘূর্ণায়মান নিয়ন লাইটিং ওয়াপার (From Blogger Video) */
+    .btn-wrapper {
+      position: relative;
+      display: inline-block;
+      padding: 3px;
+      border-radius: 50px;
+      overflow: hidden;
+      box-shadow: 0 0 22px rgba(0, 242, 254, 0.38);
+    }
+    .btn-wrapper::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(
+        transparent 20%,
+        #00f2fe 50%,
+        transparent 80%
+      );
+      animation: rotateLighting 3s linear infinite;
+    }
+    @keyframes rotateLighting {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .btn-inner-neon {
+      position: relative;
+      z-index: 1;
+      background: #080d14;
+      color: #ffffff;
+      font-family: 'Orbitron', 'Hind Siliguri', sans-serif;
+      font-weight: 700;
+      border: none;
+      border-radius: 48px;
+      padding: 10px 22px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-shadow: 0 0 8px rgba(0, 242, 254, 0.8);
+    }
+    .neon-card {
+      background: rgba(10, 18, 34, 0.88);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(0, 242, 254, 0.28);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: 0 8px 32px rgba(2, 6, 23, 0.8), 0 0 18px -6px rgba(0, 242, 254, 0.25);
+    }
+    .neon-card-active {
+      background: rgba(12, 24, 46, 0.94);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(0, 242, 254, 0.75);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: 0 0 28px -4px rgba(0, 242, 254, 0.48);
+    }
+    .neon-btn {
+      background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+      color: #ffffff;
+      font-weight: 700;
+      border: 1px solid rgba(0, 242, 254, 0.75);
+      border-radius: 12px;
+      padding: 9px 14px;
+      cursor: pointer;
+      box-shadow: 0 0 18px -3px rgba(0, 242, 254, 0.65);
+      transition: all 0.2s ease;
+    }
+    .neon-btn:hover {
+      box-shadow: 0 0 26px 0px rgba(0, 242, 254, 0.95);
+      transform: translateY(-1px);
+    }
+    .dark-input {
+      background: #03060e;
+      color: #f8fafc;
+      border: 1px solid rgba(0, 242, 254, 0.35);
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-size: 13px;
+      outline: none;
+      width: 100%;
+    }
+    .dark-input:focus {
+      border-color: #00f2fe;
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+    }
+    .miniapp-minimized {
+      position: fixed !important;
+      bottom: 12px !important;
+      right: 12px !important;
+      left: 12px !important;
+      height: 64px !important;
+      overflow: hidden !important;
+      z-index: 9999 !important;
+      border-radius: 16px !important;
+      border: 2px solid #00f2fe !important;
+      background: #060d1f !important;
+    }
+    .miniapp-maximized {
+      min-height: 100vh;
+      width: 100%;
+    }
+    .avatar-ring {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #00f2fe;
+      box-shadow: 0 0 14px rgba(0, 242, 254, 0.7);
+      background: #0a1428;
+    }
+    /* Full-Screen Ad Modal Overlay (Exact Blogger Video Style 00:40) */
+    .ad-overlay-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(4, 7, 15, 0.92);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .ad-overlay-box {
+      width: 100%;
+      max-width: 390px;
+      background: linear-gradient(180deg, #0b1622 0%, #09121c 100%);
+      border: 1.5px solid #00f2fe;
+      border-radius: 22px;
+      padding: 28px 20px;
+      text-align: center;
+      box-shadow: 0 0 42px rgba(0, 242, 254, 0.35), inset 0 0 20px rgba(0, 242, 254, 0.12);
+    }
+    .ad-timer-pill {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 9px 22px;
+      border-radius: 50px;
+      background: rgba(6, 20, 35, 0.95);
+      border: 1.5px solid #00f2fe;
+      color: #00f2fe;
+      font-weight: 700;
+      font-size: 14px;
+      box-shadow: 0 0 18px rgba(0, 242, 254, 0.35);
+    }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body class="p-2 sm:p-4">
+
+  <!-- ==========================================================================
+       FULL-SCREEN 10-SECOND AD INTERMISSION OVERLAY (Exact Blogger Video Style)
+       ========================================================================== -->
+  <div id="adOverlayModal" class="ad-overlay-modal hidden">
+    <div class="ad-overlay-box">
+      <div class="text-xl font-bold text-[#00f2fe] tracking-wide">
+        বিজ্ঞাপন চলছে...
+      </div>
+      <div class="ad-timer-pill">
+        ⏱️ <span id="adModalSecText">10</span> সেকেন্ড পর অটো বন্ধ হবে
+      </div>
+      <div id="adSlotDetailText" class="text-xs font-mono-num text-cyan-200 mt-3">
+        Serial Slot #1/9 (Zone 11924593)
+      </div>
+      <div class="text-[11px] text-emerald-300 mt-2">
+        🧹 ১০ সেকেন্ড পর অটো কেটে যাবে (জিরো-ক্যাশ) এবং একাউন্টে +1 🪙 গোল্ড কয়েন যোগ হবে!
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       BLOGGER EDIT HTML / HOPWEB CODE COPY MODAL
+       ========================================================================== -->
+  <div id="bloggerCodeModal" class="ad-overlay-modal hidden">
+    <div class="neon-card-active w-full max-w-3xl max-h-[90vh] flex flex-col gap-3">
+      <div class="flex items-center justify-between border-b border-cyan-500/30 pb-2">
+        <div class="text-sm font-bold text-cyan-300">
+          📋 Blogger (Theme &rarr; Classic Theme &rarr; Edit HTML) ও HopWeb-এর সম্পূর্ণ কোড
+        </div>
+        <button onclick="closeBloggerCodeModal()" class="px-3 py-1 rounded-lg bg-rose-600 text-white text-xs font-bold cursor-pointer">
+          ✕ বন্ধ করুন
+        </button>
+      </div>
+      <div class="text-xs text-slate-300 leading-relaxed">
+        ১. নিচের <strong>"📋 ১-ক্লিকে সম্পূর্ণ কোড কপি করুন"</strong> বাটনে চাপ দিন।<br/>
+        ২. আপনার <strong>Blogger.com &rarr; Theme &rarr; ▼ &rarr; Switch to first-generation Classic theme &rarr; Edit HTML</strong>-এ গিয়ে আগের সব কোড মুছে এটি Paste করে Save করুন!
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <button onclick="copyAllHtmlForBlogger()" class="neon-btn text-xs flex-1 py-2.5">
+          📋 ১-ক্লিকে সম্পূর্ণ index.html কোড কপি করুন (Copy All Code)
+        </button>
+        <button onclick="downloadHopWebIndexHtml()" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold cursor-pointer">
+          📥 Download index.html
+        </button>
+      </div>
+      <textarea
+        id="bloggerRawHtmlTextarea"
+        readonly
+        class="dark-input font-mono-num text-[11px] h-64 leading-relaxed"
+        onclick="this.select()"
+      ></textarea>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       3. TOP BAR WITH smbg.png PROFILE PICTURE + BLOGGER COPY + MINIMIZE/MAXIMIZE
+       ========================================================================== -->
+  <div id="miniAppRoot" class="max-w-6xl mx-auto miniapp-maximized transition-all duration-300">
+    <!-- Blogger & HopWeb Quick Copy Banner -->
+    <div id="bloggerHelperBanner" class="neon-card mb-3 flex flex-wrap items-center justify-between gap-2 border-cyan-400/60 bg-cyan-950/30">
+      <div class="text-xs text-cyan-200">
+        🟠 <strong>Blogger (Theme &rarr; Edit HTML)</strong> অথবা <strong>HopWeb</strong>-এ বসানোর জন্য এক ফাইলের সম্পূর্ণ কোড:
+      </div>
+      <div class="flex flex-wrap items-center gap-1.5">
+        <button onclick="copyAllHtmlForBlogger()" class="neon-btn text-xs py-1.5 px-3">
+          📋 Copy All HTML (Blogger Edit HTML)
+        </button>
+        <button onclick="openBloggerCodeModal()" class="px-2.5 py-1.5 rounded-lg text-xs font-bold bg-slate-900 hover:bg-slate-800 text-cyan-300 border border-cyan-400/40 cursor-pointer">
+          📄 কোড দেখুন (View Code)
+        </button>
+        <a href="smbg.png" download="smbg.png" class="px-2.5 py-1.5 rounded-lg text-xs font-bold bg-slate-900 hover:bg-slate-800 text-emerald-300 border border-emerald-400/40 no-underline cursor-pointer">
+          🖼️ smbg.png
+        </a>
+      </div>
+    </div>
+
+    <header class="neon-card-active mb-3 flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2.5">
+        <a href="smbg.png" download="smbg.png" title="smbg.png প্রোফাইল ছবি">
+          <img
+            src="smbg.png"
+            alt="SM SADI (smbg.png)"
+            referrerPolicy="no-referrer"
+            class="avatar-ring"
+            onerror="this.onerror=null;this.src=window.SMBG_FALLBACK_URI||'';"
+          />
+        </a>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-orbitron font-bold text-base tracking-wider">SM SADI</span>
+            <span class="text-[11px] font-mono-num px-2 py-0.5 rounded bg-emerald-950/90 text-emerald-300 border border-emerald-500/40">
+              ⛏️ MiniApp
+            </span>
+          </div>
+          <div class="text-[11px] text-slate-400">
+            Blogger Theme Edit HTML + HopWeb + GitHub + Render All-in-One (`index.html`)
+          </div>
+        </div>
+      </div>
+
+      <!-- Gold Coins + Telegram Sync + Minimize / Maximize Buttons -->
+      <div class="flex flex-wrap items-center gap-1.5">
+        <div class="px-2.5 py-1 rounded-lg bg-amber-950/80 border border-amber-400/50 text-xs font-mono-num font-bold text-amber-300">
+          🪙 Gold Coins: <span id="goldCoinTopCount">0</span>
+        </div>
+        <button onclick="activateTelegramStartMenuButton()" class="px-2.5 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white cursor-pointer">
+          ⚡ Sync /start Bot
+        </button>
+        <button onclick="toggleMiniAppSize('MINIMIZE')" class="px-2.5 py-1.5 rounded-lg text-xs font-mono-num bg-slate-900 hover:bg-slate-800 text-cyan-300 border border-cyan-500/30 cursor-pointer">
+          — Minimize
+        </button>
+        <button onclick="toggleMiniAppSize('MAXIMIZE')" class="px-2.5 py-1.5 rounded-lg text-xs font-mono-num bg-slate-900 hover:bg-slate-800 text-cyan-300 border border-cyan-500/30 cursor-pointer">
+          □ Maximize
+        </button>
+      </div>
+    </header>
+
+    <!-- ========================================================================
+         4. SEARCH FILTER BOX + smbg.png + USERNAME + "🚀 Open SM AI TRADER" BUTTON
+         (সার্চ এর ফিল্টার বক্সে ইউজার নাম এর ডান পাশে "🚀 Open SM AI TRADER" বাটন)
+         ======================================================================== -->
+    <div class="neon-card mb-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+      <div class="flex-1">
+        <input
+          id="searchFilterInput"
+          type="text"
+          oninput="renderTradeTable()"
+          placeholder="🔍 Search trade ID, pair (BTCUSDT), or @user..."
+          class="dark-input"
+        />
+      </div>
+
+      <div class="flex items-center justify-between sm:justify-end gap-2.5 bg-slate-950/95 border border-cyan-500/40 rounded-xl px-3 py-1.5">
+        <img
+          src="smbg.png"
+          alt="smbg.png"
+          referrerPolicy="no-referrer"
+          class="avatar-ring"
+          style="width:32px;height:32px;"
+          onerror="this.onerror=null;this.src=window.SMBG_FALLBACK_URI||'';"
+        />
+        <div class="text-xs">
+          <div class="text-slate-400 text-[10px]">Telegram User</div>
+          <div id="displayUserHandle" class="font-mono-num font-bold text-cyan-300">@sadi_quant_pro (7504836023)</div>
+        </div>
+        <div class="btn-wrapper">
+          <button
+            onclick="openSmAiTraderMiniApp()"
+            class="btn-inner-neon text-xs whitespace-nowrap"
+          >
+            <span>🚀 Open SM AI TRADER</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================================
+         5. TOP WALLET & BONUS TIER CARDS ($10M DEMO + $1 WELCOME + GOLD COINS)
+         ======================================================================== -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+      <!-- 1. Active Wallet Switcher Card -->
+      <div class="neon-card-active">
+        <div class="flex items-center justify-between text-xs text-slate-400">
+          <span id="activeWalletTitle">Demo Balance ($10M)</span>
+          <div class="flex gap-1 bg-slate-950 p-0.5 rounded-lg border border-cyan-500/30">
+            <button id="btnModeDemo" onclick="switchMode('DEMO')" class="px-2.5 py-0.5 rounded text-xs font-bold bg-cyan-500/25 text-cyan-200 cursor-pointer">Demo</button>
+            <button id="btnModeReal" onclick="switchMode('REAL')" class="px-2.5 py-0.5 rounded text-xs font-bold text-slate-400 cursor-pointer">Main</button>
+          </div>
+        </div>
+        <div id="activeBalanceDisplay" class="text-xl font-bold font-mono-num text-white mt-2">$10,000,000.00</div>
+        <div class="text-[11px] font-mono-num text-cyan-300 mt-1">
+          Main Balance: $<span id="realBalSmall">1.00</span> ($1 Welcome) · Hold: $2.00
+        </div>
+      </div>
+
+      <!-- 2. Tiered Demo Profit Bonus Card -->
+      <div class="neon-card">
+        <div class="flex items-center justify-between text-xs text-slate-400">
+          <span>Locked Demo Profit Bonus</span>
+          <span id="bonusTierBadge" class="text-[11px] font-mono-num text-cyan-300">50% / 70% Tiers</span>
+        </div>
+        <div id="lockedBonusDisplay" class="text-xl font-bold font-mono-num text-cyan-300 mt-2">$0.00</div>
+        <div class="text-[11px] text-slate-300 mt-1">
+          ১ম ডিপোজিট $3-$5 (50%), $5-$10 (50% আজীবন), $50+ (70% আজীবন)
+        </div>
+      </div>
+
+      <!-- 3. 2% Admin Service Fee & Gold Coins -->
+      <div class="neon-card">
+        <div class="flex items-center justify-between text-xs text-slate-400">
+          <span>2% Admin Fee &amp; Gold Coins</span>
+          <span class="text-[11px] font-mono-num text-amber-300">ID: 7504836023</span>
+        </div>
+        <div class="flex items-baseline justify-between mt-2 font-mono-num">
+          <div id="adminFeeVaultDisplay" class="text-lg font-bold text-emerald-400">$0.00 USD</div>
+          <div class="text-sm font-bold text-amber-300">🪙 <span id="goldCoinCardCount">0</span> Coins</div>
+        </div>
+        <div class="text-[11px] text-slate-400 mt-1">
+          প্রতি ট্রেডে ২% ফি অটো ও ১০ সেকেন্ড অ্যাড শেষে +1 গোল্ড কয়েন
+        </div>
+      </div>
+
+      <!-- 4. Live Market & >=98% Confidence Scanner -->
+      <div class="neon-card">
+        <div class="flex items-center justify-between text-xs text-slate-400">
+          <select id="symbolSelect" onchange="changeSymbol()" class="bg-slate-950 text-cyan-300 font-bold text-xs rounded px-1.5 py-0.5 border border-cyan-500/30 outline-none">
+            <option value="BTCUSDT">BTC/USDT</option>
+            <option value="ETHUSDT">ETH/USDT</option>
+            <option value="SOLUSDT">SOL/USDT</option>
+            <option value="BNBUSDT">BNB/USDT</option>
+          </select>
+          <span id="aiConfidenceBadge" class="text-[11px] font-mono-num text-emerald-400 font-bold">98.65% (&ge;98%)</span>
+        </div>
+        <div id="livePriceDisplay" class="text-xl font-bold font-mono-num text-white mt-2">$84,250.00</div>
+        <div class="text-[10px] font-mono-num text-cyan-400 truncate mt-1">
+          Next Ad: <span id="nextAdSlotLabel">Slot #1/9 (Zone 11924593)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================================
+         6. LIVE CHART + SM SADI CONTINUOUS AUTO-TRADING & 10S AD CONTROL PANEL
+         ======================================================================== -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 mb-4">
+      <!-- Left: Live SVG Chart + Deposit/Withdraw Quick Box -->
+      <div class="lg:col-span-7 neon-card flex flex-col gap-3">
+        <div class="flex items-center justify-between border-b border-cyan-500/15 pb-2">
+          <div>
+            <div class="text-sm font-bold text-white">SM SADI Live Quant Feed (&ge;98% Confidence Filter)</div>
+            <div class="text-[11px] text-slate-400">Real-Time Binance WebSocket (`wss://stream.binance.com:9443`)</div>
+          </div>
+          <div class="text-xs font-mono-num px-2.5 py-1 rounded bg-emerald-950/70 text-emerald-300 border border-emerald-500/30">
+            &ge; 98% SIGNAL READY
+          </div>
+        </div>
+
+        <svg id="liveChartSvg" viewBox="0 0 600 210" class="w-full h-48 bg-[#03060e] rounded-xl border border-slate-800"></svg>
+
+        <!-- Local Gateway Deposit & Withdraw (bKash / Nagad / Rocket) -->
+        <div class="border-t border-cyan-500/15 pt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3">
+            <div class="text-xs font-bold text-cyan-300 mb-2">
+              💳 Deposit (bKash / Nagad / Rocket — Min $2)
+            </div>
+            <div class="grid grid-cols-2 gap-1.5 mb-2">
+              <button onclick="setDepositPreset(2)" class="text-[11px] py-1 px-2 rounded bg-slate-900 border border-slate-700 text-slate-200 cursor-pointer">$2 Min (247৳)</button>
+              <button onclick="setDepositPreset(4)" class="text-[11px] py-1 px-2 rounded bg-slate-900 border border-cyan-500/30 text-cyan-300 cursor-pointer">$4 (50% Once)</button>
+              <button onclick="setDepositPreset(6)" class="text-[11px] py-1 px-2 rounded bg-slate-900 border border-cyan-500/30 text-cyan-300 cursor-pointer">$6 (50% Life)</button>
+              <button onclick="setDepositPreset(50)" class="text-[11px] py-1 px-2 rounded bg-slate-900 border border-emerald-500/40 text-emerald-300 cursor-pointer">$50 (70% Life)</button>
+            </div>
+            <div class="flex gap-1.5">
+              <input id="depositUsdInput" type="number" min="2" step="1" value="6" class="dark-input" style="width:75px;" />
+              <input id="depositTxInput" type="text" value="BK98X72M4Q" placeholder="TxID" class="dark-input uppercase" />
+              <button onclick="submitInstantDeposit()" class="neon-btn text-xs">Deposit</button>
+            </div>
+          </div>
+
+          <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3 flex flex-col justify-between">
+            <div>
+              <div class="text-xs font-bold text-emerald-400 mb-1">
+                💸 Withdraw ($2.00 Mandatory Hold Rule)
+              </div>
+              <div class="text-[11px] text-slate-400 mb-2">
+                একাউন্টে সর্বনিম্ন $2.00 লক থাকবে। উত্তোলনযোগ্য: $<span id="withdrawableUsdText">0.00</span>
+              </div>
+            </div>
+            <div class="flex gap-1.5">
+              <input id="withdrawUsdInput" type="number" min="1" step="1" value="2" class="dark-input" style="width:80px;" />
+              <input id="withdrawPhoneInput" type="text" value="+8801711948201" class="dark-input" />
+              <button onclick="submitWithdraw()" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/40 cursor-pointer">Withdraw</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Continuous Auto-Trading Control Panel (Dropdown 1-10m + Manual Input + Stop Limit Box + 10s Ad Break) -->
+      <div class="lg:col-span-5 neon-card flex flex-col justify-between gap-3">
+        <div class="flex flex-col gap-3">
+          <div class="flex items-center justify-between border-b border-cyan-500/15 pb-2">
+            <span class="text-sm font-bold text-white">SM SADI অটো-ট্রেডিং ও গোল্ড কয়েন</span>
+            <span id="autoTimerText" class="text-xs font-mono-num text-cyan-300">STANDBY</span>
+          </div>
+
+          <div id="statusAlertBox" class="hidden p-2.5 rounded-lg text-xs border"></div>
+
+          <!-- 1. Timing Dropdown (1..10m, 20..50m, 1..10h) + Manual Input Beside It -->
+          <div>
+            <label class="block text-xs text-slate-300 mb-1">
+              ট্রেডিং টাইম (ড্রপডাউন অথবা পাশে ম্যানুয়ালি লিখুন: ১ মিনিট – ১০ ঘণ্টা):
+            </label>
+            <div class="grid grid-cols-2 gap-2">
+              <select id="durationDropdown" onchange="onDropdownDurationSelect()" class="dark-input font-mono-num">
+                <option value="1">1 মিনিট (1m)</option>
+                <option value="2">2 মিনিট (2m)</option>
+                <option value="3">3 মিনিট (3m)</option>
+                <option value="4">4 মিনিট (4m)</option>
+                <option value="5">5 মিনিট (5m)</option>
+                <option value="6">6 মিনিট (6m)</option>
+                <option value="7">7 মিনিট (7m)</option>
+                <option value="8">8 মিনিট (8m)</option>
+                <option value="9">9 মিনিট (9m)</option>
+                <option value="10">10 মিনিট (10m)</option>
+                <option value="20">20 মিনিট (20m)</option>
+                <option value="30">30 মিনিট (30m)</option>
+                <option value="40">40 মিনিট (40m)</option>
+                <option value="50">50 মিনিট (50m)</option>
+                <option value="60">1 ঘণ্টা (60m)</option>
+                <option value="120">2 ঘণ্টা (120m)</option>
+                <option value="180">3 ঘণ্টা (180m)</option>
+                <option value="240">4 ঘণ্টা (240m)</option>
+                <option value="300">5 ঘণ্টা (300m)</option>
+                <option value="360">6 ঘণ্টা (360m)</option>
+                <option value="420">7 ঘণ্টা (420m)</option>
+                <option value="480">8 ঘণ্টা (480m)</option>
+                <option value="540">9 ঘণ্টা (540m)</option>
+                <option value="600">10 ঘণ্টা (600m)</option>
+              </select>
+
+              <div class="flex items-center gap-1">
+                <input id="manualDurationInput" type="number" min="1" max="600" value="1" oninput="onManualDurationInput()" class="dark-input font-mono-num" placeholder="সময়..." />
+                <select id="manualDurationUnit" onchange="onManualDurationInput()" class="dark-input font-bold text-cyan-300" style="width:78px;">
+                  <option value="MIN">মিনিট</option>
+                  <option value="HOUR">ঘণ্টা</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Min ($10) & Max ($200) Investment Per Trade -->
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-[11px] text-slate-300 mb-1">সর্বনিম্ন ট্রেড (Min $)</label>
+              <input id="minStakeInput" type="number" min="1" step="1" value="10" class="dark-input font-mono-num" />
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-300 mb-1">সর্বোচ্চ ট্রেড (Max $)</label>
+              <input id="maxStakeInput" type="number" min="1" step="5" value="200" class="dark-input font-mono-num" />
+            </div>
+          </div>
+
+          <!-- 3. Account Limited Checkbox + Dropdown Arrow -> "স্টপ লিমিটেড বক্স" (1000) -->
+          <div class="bg-slate-950/90 border border-cyan-500/30 rounded-xl p-2.5">
+            <div class="flex items-center justify-between">
+              <label class="flex items-center gap-2 text-xs font-bold text-slate-200 cursor-pointer">
+                <input id="stopLimitCheckbox" type="checkbox" onchange="onStopLimitCheckChange()" class="w-4 h-4 accent-cyan-400 rounded cursor-pointer" />
+                <span>একাউন্ট লিমিটেড (Account Limited)</span>
+              </label>
+              <button type="button" onclick="toggleStopLimitBox()" class="px-2 py-1 rounded bg-slate-900 border border-cyan-500/30 text-cyan-300 text-xs font-semibold cursor-pointer">
+                স্টপ লিমিটেড বক্স ▼
+              </button>
+            </div>
+
+            <div id="stopLimitBoxContainer" class="hidden mt-2 pt-2 border-t border-slate-800">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-xs text-cyan-300 whitespace-nowrap">স্টপ লিমিটেড বক্স ($):</span>
+                <input id="stopLimitUsdInput" type="number" min="1" step="10" value="1000" class="dark-input font-mono-num" />
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">
+                একাউন্টে যখন এই পরিমাণ টাকা (যেমন: ১০০০) হয়ে যাবে তখন আর ট্রেড করবে না, অটো স্টপ হবে। আর ১০০০ এর বেশি থাকলে সর্বনিম্ন ($10) থেকে সর্বোচ্চ ($200) এর মধ্যেই ট্রেডিং চলবে।
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-2.5">
+          <div class="btn-wrapper w-full">
+            <button id="btnAutoToggle" onclick="toggleAutoTrading()" class="btn-inner-neon w-full py-3 text-xs">
+              ▶️ অটো-ট্রেডিং চালু করুন (Continuous Loop + 10s Ad)
+            </button>
+          </div>
+          <button onclick="executeManualWithAd()" class="w-full py-2.5 rounded-xl text-xs font-bold bg-slate-900 hover:bg-cyan-950/80 text-cyan-300 border border-cyan-500/40 cursor-pointer">
+            ⚡ Execute 1 Trade (&ge;98% SADI · +1 🪙 Gold Coin)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================================
+         7. VERIFIED TRADE LEDGER TABLE
+         ======================================================================== -->
+    <div class="neon-card">
+      <div class="flex items-center justify-between border-b border-cyan-500/15 pb-2.5 mb-3">
+        <div class="text-sm font-bold text-white">SM SADI Execution Ledger (2% Admin Fee Auto-Deducted)</div>
+        <div class="text-xs font-mono-num text-cyan-300" id="tradeCountLabel">0 Trades</div>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-xs font-mono-num">
+          <thead>
+            <tr class="border-b border-slate-800 text-slate-400">
+              <th class="py-2 px-2">ID · Mode</th>
+              <th class="py-2 px-2">Pair · Duration</th>
+              <th class="py-2 px-2 text-right">Stake</th>
+              <th class="py-2 px-2 text-right">Gross Profit</th>
+              <th class="py-2 px-2 text-right">2% Admin Fee</th>
+              <th class="py-2 px-2 text-right">Net Profit</th>
+            </tr>
+          </thead>
+          <tbody id="tradeTableBody" class="divide-y divide-slate-800/60"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       8. EMBEDDED WEB WORKER (worker.js) + 9-SLOT MONETAG ROTATOR + ZERO-CACHE
+       ========================================================================== -->
+  <script>
+    // Embedded SVG Data-URI fallback for smbg.png when hosted on Blogger (*.blogspot.com)
+    window.SMBG_FALLBACK_URI = "data:image/svg+xml;utf8," + encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">' +
+      '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00f2fe"/><stop offset="100%" stop-color="#0072ff"/></linearGradient></defs>' +
+      '<rect width="120" height="120" rx="60" fill="#060d1f"/>' +
+      '<circle cx="60" cy="60" r="56" fill="none" stroke="url(#g)" stroke-width="5"/>' +
+      '<text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" fill="#00f2fe" font-family="Orbitron,sans-serif" font-weight="900" font-size="24">SADI</text>' +
+      '<text x="50%" y="76%" dominant-baseline="middle" text-anchor="middle" fill="#10b981" font-family="monospace" font-weight="700" font-size="13">98% AI</text>' +
+      '</svg>'
+    );
+
+    const CONFIG = JSON.parse(document.getElementById('sm-sadi-json-config').textContent);
+
+    // Hide the Blogger Copy Helper Banner automatically once deployed on *.blogspot.com
+    if (window.location.hostname.includes('blogspot.com')) {
+      const helper = document.getElementById('bloggerHelperBanner');
+      if (helper) helper.classList.add('hidden');
+    }
+
+    // 3 Monetag Zones × 3 Formats = 9 Serial Ad Slots in Round-Robin Order
+    const MONETAG_SLOTS = [
+      { idx: 1, zone: '11924593', fn: 'show_11924593', type: 'interstitial', label: 'Zone 11924593 · #1 Rewarded Interstitial' },
+      { idx: 2, zone: '11924593', fn: 'show_11924593', type: 'pop',          label: 'Zone 11924593 · #2 Rewarded Popup' },
+      { idx: 3, zone: '11924593', fn: 'show_11924593', type: 'inApp',        label: 'Zone 11924593 · #3 In-App Interstitial' },
+      { idx: 4, zone: '11924529', fn: 'show_11924529', type: 'interstitial', label: 'Zone 11924529 · #4 Rewarded Interstitial' },
+      { idx: 5, zone: '11924529', fn: 'show_11924529', type: 'pop',          label: 'Zone 11924529 · #5 Rewarded Popup' },
+      { idx: 6, zone: '11924529', fn: 'show_11924529', type: 'inApp',        label: 'Zone 11924529 · #6 In-App Interstitial' },
+      { idx: 7, zone: '11924571', fn: 'show_11924571', type: 'interstitial', label: 'Zone 11924571 · #7 Rewarded Interstitial' },
+      { idx: 8, zone: '11924571', fn: 'show_11924571', type: 'pop',          label: 'Zone 11924571 · #8 Rewarded Popup' },
+      { idx: 9, zone: '11924571', fn: 'show_11924571', type: 'inApp',        label: 'Zone 11924571 · #9 In-App Interstitial' }
+    ];
+
+    const state = {
+      activeMode: 'DEMO',
+      selectedSymbol: 'BTCUSDT',
+      demoBalanceUsd: CONFIG.INITIAL_DEMO_BALANCE_USD,
+      realBalanceUsd: CONFIG.WELCOME_MAIN_BALANCE_USD,
+      lockedBonusUsd: 0.00,
+      firstRealDepositUsd: 0.00,
+      demoBonusTier: 'NONE',
+      adminFeeVaultUsd: 0.00,
+      goldCoins: 0,
+      selectedDurationMinutes: 1,
+      autoRunning: false,
+      startingBalanceAtAutoStart: 0,
+      serialAdIndex: 0,
+      livePrice: 84250.00,
+      aiConfidence: 98.65,
+      priceHistory: [84190, 84210, 84205, 84230, 84245, 84238, 84260, 84255, 84275, 84290],
+      trades: []
+    };
+
+    let activeLoopTimer = null;
+    let activeWs = null;
+    let pristineHtmlCache = null;
+
+    // Fetch pristine index.html source once so 1-click Copy for Blogger gets clean unmodified code
+    fetch('/api/deliverables')
+      .then(r => r.json())
+      .then(d => {
+        if (d && Array.isArray(d.deliverables)) {
+          const idxFile = d.deliverables.find(f => f.id === 'index.html');
+          if (idxFile && idxFile.content) pristineHtmlCache = idxFile.content;
+        }
+      })
+      .catch(() => {});
+
+    if (window.Telegram && window.Telegram.WebApp) {
+      try {
+        window.Telegram.WebApp.ready();
+        window.Telegram.WebApp.expand();
+        const tgUser = window.Telegram.WebApp.initDataUnsafe?.user;
+        if (tgUser) {
+          document.getElementById('displayUserHandle').textContent =
+            `@${tgUser.username || tgUser.first_name} (${tgUser.id})`;
+        }
+      } catch (e) {}
+    }
+
+    // Embedded worker.js via Blob URL for Telegram /start polling
+    try {
+      const inlineWorkerScript = `
+        let lastUpdateOffset = 0;
+        let botToken = "";
+        let miniAppUrl = "";
+        self.onmessage = function(e) {
+          if (e.data.type === 'INIT_WORKER') {
+            botToken = e.data.payload.botToken;
+            miniAppUrl = e.data.payload.miniAppUrl;
+            setInterval(pollTelegramStartCommand, 4000);
+          }
+        };
+        async function pollTelegramStartCommand() {
+          if (!botToken) return;
+          try {
+            const res = await fetch('https://api.telegram.org/bot' + botToken + '/getUpdates?offset=' + (lastUpdateOffset + 1) + '&timeout=1');
+            const data = await res.json();
+            if (data && data.ok && Array.isArray(data.result)) {
+              for (const upd of data.result) {
+                lastUpdateOffset = upd.update_id;
+                const msg = upd.message;
+                if (msg && msg.text && msg.text.trim().toUpperCase().startsWith('/START')) {
+                  await fetch('https://api.telegram.org/bot' + botToken + '/sendMessage', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      chat_id: msg.chat.id,
+                      text: '🚀 *SM SADI — Automated AI Trading MiniApp*\\n\\n✅ Demo Balance: *$10,000,000.00*\\n🎁 Main Welcome Balance: *$1.00 USD*\\n🪙 Gold Coin Rewards Active!',
+                      parse_mode: 'Markdown',
+                      reply_markup: {
+                        inline_keyboard: [[{ text: '🚀 Open SM AI TRADER (⛏️ MiniApp)', web_app: { url: miniAppUrl } }]]
+                      }
+                    })
+                  });
+                }
+              }
+            }
+          } catch (err) {}
+        }
+      `;
+      const sadiWorker = new Worker(URL.createObjectURL(new Blob([inlineWorkerScript], { type: 'application/javascript' })));
+      sadiWorker.postMessage({
+        type: 'INIT_WORKER',
+        payload: { botToken: CONFIG.USER_BOT_TOKEN, miniAppUrl: window.location.href.split('#')[0] }
+      });
+    } catch (e) {}
+
+    // Zero-Cache Ad Trace Purger (কোনো ক্যাশ ফাইল বা বিজ্ঞাপনের ডিটেইলস অ্যাপে থাকবে না)
+    function purgeAllAdTraces() {
+      try {
+        const keepIds = ['miniAppRoot', 'adOverlayModal', 'bloggerCodeModal'];
+        Array.from(document.body.children).forEach(el => {
+          if (!keepIds.includes(el.id) && el.tagName !== 'SCRIPT') {
+            el.remove();
+          }
+        });
+      } catch (e) {}
+      try {
+        sessionStorage.clear();
+        sessionStorage.setItem('__telegram__initParams', JSON.stringify({ tgWebAppVersion: '7.10' }));
+      } catch (e) {}
+      try { localStorage.clear(); } catch (e) {}
+    }
+
+    function playNextSerialMonetagAd() {
+      const slot = MONETAG_SLOTS[state.serialAdIndex % MONETAG_SLOTS.length];
+      try {
+        const sdkFn = window[slot.fn];
+        if (typeof sdkFn === 'function') {
+          if (slot.type === 'interstitial') Promise.resolve(sdkFn()).catch(() => {});
+          else if (slot.type === 'pop') Promise.resolve(sdkFn('pop')).catch(() => {});
+          else Promise.resolve(sdkFn({
+            type: 'inApp',
+            inAppSettings: { frequency: 2, capping: 0.1, interval: 30, timeout: 5, everyPage: false }
+          })).catch(() => {});
+        }
+      } catch (e) {}
+      return slot;
+    }
+
+    function onDropdownDurationSelect() {
+      const mins = parseInt(document.getElementById('durationDropdown').value, 10) || 1;
+      state.selectedDurationMinutes = mins;
+      if (mins >= 60 && mins % 60 === 0) {
+        document.getElementById('manualDurationUnit').value = 'HOUR';
+        document.getElementById('manualDurationInput').value = mins / 60;
+      } else {
+        document.getElementById('manualDurationUnit').value = 'MIN';
+        document.getElementById('manualDurationInput').value = mins;
+      }
+    }
+
+    function onManualDurationInput() {
+      const val = parseFloat(document.getElementById('manualDurationInput').value) || 1;
+      const unit = document.getElementById('manualDurationUnit').value;
+      const totalMins = Math.max(1, Math.min(600, Math.round(unit === 'HOUR' ? val * 60 : val)));
+      state.selectedDurationMinutes = totalMins;
+    }
+
+    function onStopLimitCheckChange() {
+      const checked = document.getElementById('stopLimitCheckbox').checked;
+      if (checked) {
+        document.getElementById('stopLimitBoxContainer').classList.remove('hidden');
+      }
+    }
+
+    function toggleStopLimitBox() {
+      document.getElementById('stopLimitBoxContainer').classList.toggle('hidden');
+    }
+
+    function checkStopLimitHit() {
+      const enabled = document.getElementById('stopLimitCheckbox').checked;
+      if (!enabled) return false;
+      const limitVal = parseFloat(document.getElementById('stopLimitUsdInput').value) || 1000;
+      const curBal = state.activeMode === 'REAL' ? state.realBalanceUsd : state.demoBalanceUsd;
+      if (state.startingBalanceAtAutoStart > limitVal && curBal <= limitVal) return true;
+      if (state.startingBalanceAtAutoStart < limitVal && curBal >= limitVal) return true;
+      if (Math.abs(curBal - limitVal) < 0.01) return true;
+      return false;
+    }
+
+    function toggleAutoTrading() {
+      if (state.autoRunning) {
+        stopAutoTrading('ইউজার অটো-ট্রেডিং বন্ধ করেছেন।');
+      } else {
+        state.autoRunning = true;
+        state.startingBalanceAtAutoStart = state.activeMode === 'REAL' ? state.realBalanceUsd : state.demoBalanceUsd;
+        document.getElementById('btnAutoToggle').textContent = '⏹️ বন্ধ করুন (Stop Auto-Trading)';
+        runContinuousTradeStep();
+      }
+    }
+
+    function stopAutoTrading(reasonMsg) {
+      state.autoRunning = false;
+      if (activeLoopTimer) clearInterval(activeLoopTimer);
+      document.getElementById('adOverlayModal').classList.add('hidden');
+      document.getElementById('btnAutoToggle').textContent = '▶️ অটো-ট্রেডিং চালু করুন (Continuous Loop + 10s Ad)';
+      document.getElementById('autoTimerText').textContent = 'STANDBY';
+      purgeAllAdTraces();
+      if (reasonMsg) showStatus('ok', reasonMsg);
+    }
+
+    function runContinuousTradeStep() {
+      if (!state.autoRunning) return;
+      if (checkStopLimitHit()) {
+        const limitVal = parseFloat(document.getElementById('stopLimitUsdInput').value) || 1000;
+        stopAutoTrading(`🛑 স্টপ লিমিট ($${limitVal}) পূর্ণ হয়েছে! ট্রেডিং স্বয়ংক্রিয়ভাবে বন্ধ হয়েছে।`);
+        return;
+      }
+
+      let secLeft = Math.min(state.selectedDurationMinutes * 60, 6);
+      document.getElementById('autoTimerText').textContent = `TRADING (${state.selectedDurationMinutes}m · ${secLeft}s)`;
+
+      if (activeLoopTimer) clearInterval(activeLoopTimer);
+      activeLoopTimer = setInterval(() => {
+        if (!state.autoRunning) {
+          clearInterval(activeLoopTimer);
+          return;
+        }
+        secLeft -= 1;
+        document.getElementById('autoTimerText').textContent = `TRADING (${state.selectedDurationMinutes}m · ${secLeft}s)`;
+        if (secLeft <= 0) {
+          clearInterval(activeLoopTimer);
+          const ok = executeSingleTrade('AUTO');
+          if (!ok) {
+            stopAutoTrading();
+            return;
+          }
+          run10SecondAdBreak(true);
+        }
+      }, 1000);
+    }
+
+    function run10SecondAdBreak(continueNextTrade) {
+      const slot = playNextSerialMonetagAd();
+      let adSec = 10;
+      const modal = document.getElementById('adOverlayModal');
+      modal.classList.remove('hidden');
+      document.getElementById('adModalSecText').textContent = adSec;
+      document.getElementById('adSlotDetailText').textContent = `Serial Slot #${slot.idx}/9: ${slot.label}`;
+      document.getElementById('autoTimerText').textContent = `AD BREAK (${adSec}s)`;
+
+      if (activeLoopTimer) clearInterval(activeLoopTimer);
+      activeLoopTimer = setInterval(() => {
+        adSec -= 1;
+        document.getElementById('adModalSecText').textContent = adSec;
+        document.getElementById('autoTimerText').textContent = `AD BREAK (${adSec}s)`;
+        if (adSec <= 0) {
+          clearInterval(activeLoopTimer);
+          modal.classList.add('hidden');
+          purgeAllAdTraces();
+          state.goldCoins += 1;
+          state.serialAdIndex = (state.serialAdIndex + 1) % MONETAG_SLOTS.length;
+          updateUI();
+          showStatus('ok', `🪙 ১০ সেকেন্ডের বিজ্ঞাপন অটো কেটে গেছে (জিরো ক্যাশ) এবং +1 Gold Coin জমা হয়েছে! মোট কয়েন: ${state.goldCoins}`);
+
+          if (continueNextTrade && state.autoRunning) {
+            runContinuousTradeStep();
+          }
+        }
+      }, 1000);
+    }
+
+    function executeManualWithAd() {
+      const ok = executeSingleTrade('MANUAL');
+      if (ok) {
+        run10SecondAdBreak(false);
+      }
+    }
+
+    function executeSingleTrade(execMode) {
+      const minVal = Math.max(1, parseFloat(document.getElementById('minStakeInput').value) || 10);
+      const maxVal = Math.max(minVal, parseFloat(document.getElementById('maxStakeInput').value) || 200);
+      const stake = Number((minVal + Math.random() * (maxVal - minVal) * 0.5).toFixed(2));
+
+      if (state.activeMode === 'REAL') {
+        const tradableReal = Math.max(0, state.realBalanceUsd - CONFIG.MANDATORY_LOCKED_HOLD_USD);
+        if (tradableReal < 1.0 || stake > tradableReal) {
+          showStatus('err', 'মেইন একাউন্টে সর্বনিম্ন $2.00 লক থাকবে। রিয়েল ট্রেড করতে কমপক্ষে $2.00 ডিপোজিট করুন অথবা Demo ($10M) মোডে ট্রেড করুন!');
+          return false;
+        }
+      }
+
+      const grossProfit = Number((stake * 0.86).toFixed(2));
+      const adminFee = Number((grossProfit * CONFIG.ADMIN_SERVICE_FEE_PCT).toFixed(2));
+      const netProfit = Number((grossProfit - adminFee).toFixed(2));
+
+      state.adminFeeVaultUsd = Number((state.adminFeeVaultUsd + adminFee).toFixed(2));
+
+      let bonusToMain = 0;
+      if (state.activeMode === 'REAL') {
+        state.realBalanceUsd = Number((state.realBalanceUsd + netProfit).toFixed(2));
+      } else {
+        state.demoBalanceUsd = Number((state.demoBalanceUsd + netProfit).toFixed(2));
+        if (state.demoBonusTier === 'LIFETIME_70_PCT') {
+          bonusToMain = Number((netProfit * 0.70).toFixed(2));
+          state.realBalanceUsd = Number((state.realBalanceUsd + bonusToMain).toFixed(2));
+        } else if (state.demoBonusTier === 'LIFETIME_50_PCT') {
+          bonusToMain = Number((netProfit * 0.50).toFixed(2));
+          state.realBalanceUsd = Number((state.realBalanceUsd + bonusToMain).toFixed(2));
+        } else {
+          state.lockedBonusUsd = Number((state.lockedBonusUsd + netProfit).toFixed(2));
+        }
+      }
+
+      state.trades.unshift({
+        id: 'SADI-' + Math.floor(1000 + Math.random() * 9000),
+        mode: `${execMode}·${state.activeMode}`,
+        symbol: state.selectedSymbol,
+        duration: state.selectedDurationMinutes + 'm',
+        stake,
+        grossProfit,
+        adminFee,
+        netProfit,
+        bonusToMain
+      });
+
+      updateUI();
+      return true;
+    }
+
+    function getCleanFullHtmlSource() {
+      if (pristineHtmlCache) return pristineHtmlCache;
+      return '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+    }
+
+    function openBloggerCodeModal() {
+      const modal = document.getElementById('bloggerCodeModal');
+      const area = document.getElementById('bloggerRawHtmlTextarea');
+      area.value = getCleanFullHtmlSource();
+      modal.classList.remove('hidden');
+    }
+
+    function closeBloggerCodeModal() {
+      document.getElementById('bloggerCodeModal').classList.add('hidden');
+    }
+
+    async function copyAllHtmlForBlogger() {
+      const code = getCleanFullHtmlSource();
+      try {
+        await navigator.clipboard.writeText(code);
+        showStatus('ok', '✅ সম্পূর্ণ index.html কোড কপি হয়েছে! এখন Blogger -> Theme -> Classic Theme -> Edit HTML-এ গিয়ে Paste করে Save করুন।');
+      } catch (e) {
+        openBloggerCodeModal();
+        const area = document.getElementById('bloggerRawHtmlTextarea');
+        area.select();
+        document.execCommand('copy');
+        showStatus('ok', '✅ সম্পূর্ণ কোড সিলেক্ট ও কপি হয়েছে! Blogger Edit HTML-এ Paste করুন।');
+      }
+    }
+
+    function downloadHopWebIndexHtml() {
+      const fullHtml = getCleanFullHtmlSource();
+      const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'index.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showStatus('ok', '✅ index.html ডাউনলোড হয়েছে!');
+    }
+
+    async function activateTelegramStartMenuButton() {
+      const appUrl = window.location.href.split('#')[0];
+      try {
+        await fetch(`https://api.telegram.org/bot${CONFIG.USER_BOT_TOKEN}/setChatMenuButton`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            menu_button: { type: 'web_app', text: '🚀 Open SM AI TRADER', web_app: { url: appUrl } }
+          })
+        });
+        showStatus('ok', '✅ Telegram /start এবং Menu Button ("🚀 Open SM AI TRADER") আপনার বর্তমান লিংকে সেট হয়েছে!');
+      } catch (e) {}
+    }
+
+    function openSmAiTraderMiniApp() {
+      toggleMiniAppSize('MAXIMIZE');
+      if (window.Telegram && window.Telegram.WebApp) window.Telegram.WebApp.expand();
+      showStatus('ok', '🚀 SM AI TRADER MiniApp Active!');
+    }
+
+    function toggleMiniAppSize(mode) {
+      const root = document.getElementById('miniAppRoot');
+      if (mode === 'MINIMIZE') root.classList.add('miniapp-minimized');
+      else root.classList.remove('miniapp-minimized');
+    }
+
+    function switchMode(mode) {
+      state.activeMode = mode;
+      updateUI();
+    }
+
+    function setDepositPreset(usd) {
+      document.getElementById('depositUsdInput').value = usd;
+    }
+
+    function submitInstantDeposit() {
+      const usd = parseFloat(document.getElementById('depositUsdInput').value) || 0;
+      if (usd < 2.0) {
+        showStatus('err', 'সর্বনিম্ন ডিপোজিট $2.00 USD (247 BDT)।');
+        return;
+      }
+      const isFirst = state.firstRealDepositUsd === 0;
+      if (isFirst) state.firstRealDepositUsd = usd;
+      state.realBalanceUsd = Number((state.realBalanceUsd + usd).toFixed(2));
+
+      if (usd >= 50.0) state.demoBonusTier = 'LIFETIME_70_PCT';
+      else if (isFirst && usd >= 5.0) state.demoBonusTier = 'LIFETIME_50_PCT';
+      else if (isFirst && usd >= 3.0 && usd < 5.0) state.demoBonusTier = 'TIER_3_TO_5_HALF_ONCE';
+
+      showStatus('ok', `✅ Deposit +$${usd.toFixed(2)} Approved! Tier: ${state.demoBonusTier}`);
+      updateUI();
+    }
+
+    function submitWithdraw() {
+      const reqUsd = parseFloat(document.getElementById('withdrawUsdInput').value) || 0;
+      const maxWithdrawable = Math.max(0, Number((state.realBalanceUsd - CONFIG.MANDATORY_LOCKED_HOLD_USD).toFixed(2)));
+      if (reqUsd <= 0 || reqUsd > maxWithdrawable) {
+        showStatus('err', `একাউন্টে $2.00 অবশ্যই থাকবে। সর্বোচ্চ উত্তোলনযোগ্য: $${maxWithdrawable.toFixed(2)} USD`);
+        return;
+      }
+      state.realBalanceUsd = Number((state.realBalanceUsd - reqUsd).toFixed(2));
+      showStatus('ok', `💸 Withdrawal of $${reqUsd.toFixed(2)} USD sent!`);
+      updateUI();
+    }
+
+    function showStatus(type, msg) {
+      const box = document.getElementById('statusAlertBox');
+      box.classList.remove('hidden');
+      box.className = `p-2.5 rounded-lg text-xs border ${
+        type === 'ok' ? 'bg-emerald-950/60 border-emerald-500/40 text-emerald-200' : 'bg-rose-950/60 border-rose-500/40 text-rose-200'
+      }`;
+      box.textContent = msg;
+    }
+
+    function changeSymbol() {
+      state.selectedSymbol = document.getElementById('symbolSelect').value || 'BTCUSDT';
+      connectBinanceStream();
+    }
+
+    function connectBinanceStream() {
+      try {
+        if (activeWs) activeWs.close();
+        const streamSym = state.selectedSymbol.toLowerCase();
+        activeWs = new WebSocket(`wss://stream.binance.com:9443/ws/${streamSym}@kline_1m`);
+        activeWs.onmessage = (event) => {
+          const msg = JSON.parse(event.data);
+          if (msg.k && msg.k.c) {
+            state.livePrice = parseFloat(msg.k.c);
+            state.priceHistory.push(state.livePrice);
+            if (state.priceHistory.length > 24) state.priceHistory.shift();
+            updateUI();
+          }
+        };
+      } catch (e) {}
+    }
+    connectBinanceStream();
+
+    function renderChart() {
+      const svg = document.getElementById('liveChartSvg');
+      const pts = state.priceHistory;
+      const min = Math.min(...pts) - 5;
+      const max = Math.max(...pts) + 5;
+      const coords = pts.map((p, i) => {
+        const x = (i / Math.max(1, pts.length - 1)) * 580 + 10;
+        const y = 190 - ((p - min) / Math.max(1, max - min)) * 165;
+        return `${x.toFixed(1)},${y.toFixed(1)}`;
+      });
+      svg.innerHTML = `
+        <defs>
+          <linearGradient id="sadiGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.40"/>
+            <stop offset="100%" stop-color="#00f2fe" stop-opacity="0.0"/>
+          </linearGradient>
+        </defs>
+        <polygon points="10,200 ${coords.join(' ')} 590,200" fill="url(#sadiGrad)" />
+        <polyline fill="none" stroke="#00f2fe" stroke-width="2.5" points="${coords.join(' ')}" />
+      `;
+    }
+
+    function renderTradeTable() {
+      const q = (document.getElementById('searchFilterInput').value || '').toLowerCase();
+      const tbody = document.getElementById('tradeTableBody');
+      const filtered = state.trades.filter(
+        t => !q || t.id.toLowerCase().includes(q) || t.symbol.toLowerCase().includes(q) || t.mode.toLowerCase().includes(q)
+      );
+      document.getElementById('tradeCountLabel').textContent = `${filtered.length} Trades`;
+      tbody.innerHTML = filtered.map(t => `
+        <tr>
+          <td class="py-2 px-2 font-bold text-slate-100">${t.id} <span class="text-cyan-300 font-normal">(${t.mode})</span></td>
+          <td class="py-2 px-2 text-slate-300">${t.symbol} · ${t.duration}</td>
+          <td class="py-2 px-2 text-right text-slate-200">$${t.stake.toFixed(2)}</td>
+          <td class="py-2 px-2 text-right text-slate-300">+$${t.grossProfit.toFixed(2)}</td>
+          <td class="py-2 px-2 text-right text-amber-300">-$${t.adminFee.toFixed(2)}</td>
+          <td class="py-2 px-2 text-right font-bold text-emerald-400">+$${t.netProfit.toFixed(2)}</td>
+        </tr>
+      `).join('');
+    }
+
+    function updateUI() {
+      const activeBal = state.activeMode === 'REAL' ? state.realBalanceUsd : state.demoBalanceUsd;
+      document.getElementById('activeWalletTitle').textContent =
+        state.activeMode === 'DEMO' ? 'Demo Balance ($10M)' : 'Main Real Balance';
+      document.getElementById('activeBalanceDisplay').textContent =
+        '$' + activeBal.toLocaleString('en-US', { minimumFractionDigits: 2 });
+      document.getElementById('realBalSmall').textContent = state.realBalanceUsd.toFixed(2);
+      document.getElementById('lockedBonusDisplay').textContent =
+        '$' + state.lockedBonusUsd.toLocaleString('en-US', { minimumFractionDigits: 2 });
+      document.getElementById('bonusTierBadge').textContent = state.demoBonusTier;
+      document.getElementById('adminFeeVaultDisplay').textContent =
+        '$' + state.adminFeeVaultUsd.toFixed(2) + ' USD';
+      document.getElementById('goldCoinTopCount').textContent = state.goldCoins;
+      document.getElementById('goldCoinCardCount').textContent = state.goldCoins;
+      document.getElementById('livePriceDisplay').textContent =
+        '$' + state.livePrice.toLocaleString('en-US', { minimumFractionDigits: 2 });
+      document.getElementById('withdrawableUsdText').textContent =
+        Math.max(0, state.realBalanceUsd - CONFIG.MANDATORY_LOCKED_HOLD_USD).toFixed(2);
+
+      const nextSlot = MONETAG_SLOTS[state.serialAdIndex % MONETAG_SLOTS.length];
+      document.getElementById('nextAdSlotLabel').textContent =
+        `Slot #${nextSlot.idx}/9 (Zone ${nextSlot.zone})`;
+
+      renderChart();
+      renderTradeTable();
+    }
+
+    updateUI();
+  </script>
+</body>
+</html>
